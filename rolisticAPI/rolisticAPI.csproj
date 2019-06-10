@@ -6,6 +6,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="5_Repositories\" />
+    <Folder Include="6_Entities\" />
+    <Folder Include="6_Entities\Contracts\" />
+    <Folder Include="5_Repositories\Contracts\" />
+    <Folder Include="7_Data\" />
+    <Folder Include="2_Services\" />
+    <Folder Include="3_DTO\" />
+    <Folder Include="3_DTO\Mappers\" />
+    <Folder Include="2_Services\Contracts\" />
   </ItemGroup>
 
   <ItemGroup>
