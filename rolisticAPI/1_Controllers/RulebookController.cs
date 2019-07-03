@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using rolisticAPI._DTO;
 using RolisticAPI._DTO;
 using RolisticAPI._Services;
 
@@ -40,6 +41,19 @@ namespace RolisticAPI.Controllers
             }
 
             return rulebook;
+        }
+
+        [HttpGet("stars")]
+        public ActionResult<IEnumerable<RulebookStarsDTO>> GetWithStars()
+        {
+            var allRulebooks = service.GetAllRulebooksWithStars();
+
+            if (allRulebooks == null || allRulebooks.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return allRulebooks;
         }
 
         [HttpPost]

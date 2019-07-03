@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using rolisticAPI._DTO;
 using RolisticAPI._DTO;
 using RolisticAPI._DTO.Mappers;
 using RolisticAPI._Repositories;
@@ -7,7 +8,7 @@ namespace RolisticAPI._Services
 {
     public class RulebookService : IRulebookService
     {
-        RulebookRepository repository;
+        readonly RulebookRepository repository;
 
         public RulebookService()
         {
@@ -24,6 +25,19 @@ namespace RolisticAPI._Services
             }
 
             var rulebooksDTOs = RulebookDTOMapper.Map(allRulebooks);
+            return rulebooksDTOs;
+        }
+
+        public List<RulebookStarsDTO> GetAllRulebooksWithStars()
+        {
+            var allRulebooks = repository.GetAll();
+
+            if (allRulebooks == null || allRulebooks.Count == 0)
+            {
+                return null;
+            }
+
+            var rulebooksDTOs = RulebookDTOMapper.MapWithStars(allRulebooks);
             return rulebooksDTOs;
         }
 
