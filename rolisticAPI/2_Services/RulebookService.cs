@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using rolisticAPI._Controllers.Filters;
 using rolisticAPI._DTO;
 using RolisticAPI._DTO;
 using RolisticAPI._DTO.Mappers;
+using RolisticAPI._Entities;
 using RolisticAPI._Repositories;
 
 namespace RolisticAPI._Services
@@ -52,6 +55,36 @@ namespace RolisticAPI._Services
 
             var rulebookDTO = RulebookDTOMapper.Map(rulebookById);
             return rulebookDTO;
+        }
+
+        public List<RulebookDTO> GetRulebooksFiltered(RulebookFilter filter)
+        {
+            var elementsByPage = 3;
+
+            var rulebooksFiltered = repository.FilterRulebooks(filter.Title,
+                filter.Asc, filter.Year);
+
+            if (rulebooksFiltered == null || rulebooksFiltered.Count == 0)
+            {
+                return null;
+            }
+
+            List<Rulebook> paginationResult;
+
+            if (rulebooksFiltered.Count > elementsByPage)
+            {
+                paginationResult = rulebooksFiltered
+                    .Skip(filter.Page * elementsByPage)
+                    .Take(elementsByPage)
+                    .ToList();
+            }
+            else
+            {
+                paginationResult = rulebooksFiltered;
+            }
+
+            var result = RulebookDTOMapper.Map(paginationResult);
+            return result;
         }
     }
 }
