@@ -16,6 +16,8 @@
     <Folder Include="3_DTO\Mappers\" />
     <Folder Include="2_Services\Contracts\" />
     <Folder Include="1_Controllers\Filters\" />
+    <Folder Include="1_Controllers\v1\" />
+    <Folder Include="1_Controllers\v2\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +29,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

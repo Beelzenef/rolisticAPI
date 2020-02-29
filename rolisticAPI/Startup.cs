@@ -19,11 +19,18 @@ namespace RolisticAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RolisticAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RolisticAPI v1", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "RolisticAPI v2", Version = "v2" });
+            });
+            services.AddApiVersioning(o =>
+            {
+                o.ReportApiVersions = true;
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
             });
         }
 
@@ -37,6 +44,7 @@ namespace RolisticAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "RolisticAPI V1");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "RolisticAPI V2");
             });
 
             if (env.IsDevelopment())
